@@ -5,16 +5,19 @@
   >
     <b-collapse
       id="mobile-button-toggle"
-      :visible="this.doCollapse"
+      :visible="doCollapse"
     >
-      <button class="btn w-100 my-2 btn-outline-secondary" @click="mobileToggle=!mobileToggle">
-        {{mobileToggle?'Hide filters':'Show filters'}}
+      <button
+        class="btn w-100 my-2 btn-outline-secondary"
+        @click="mobileToggle=!mobileToggle"
+      >
+        {{ mobileToggle?'Hide filters':'Show filters' }}
       </button>
     </b-collapse>
 
     <b-collapse
       id="mobile-toggle"
-      :visible="!this.doCollapse ||mobileToggle"
+      :visible="!doCollapse ||mobileToggle"
     >
       <!-- !this.doCollapse || -->
       <draggable
@@ -84,7 +87,6 @@ export default {
   },
   data () {
     return {
-      filtersToShow: this.filtersShown,
       filterToAdd: null,
       drag: false,
       width: 0,
@@ -92,6 +94,9 @@ export default {
     }
   },
   computed: {
+    filtersToShow () {
+      return this.filtersShown
+    },
     doCollapse () {
       // Bootstrap's mobile collapse width
       return this.width <= 576
